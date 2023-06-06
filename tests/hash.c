@@ -7,6 +7,26 @@
 #define SEED    0x12345678
 
 typedef struct {
+    char nome[30];
+    char cpf[11];
+}taluno;
+
+char * get_key(void * reg){
+    return (*((taluno *)reg)).nome;
+}
+
+
+void * aloca_aluno(char * nome, char * cpf){
+    taluno * aluno = malloc(sizeof(taluno));
+    strcpy(aluno->nome,nome);
+    strcpy(aluno->cpf,cpf);
+    return aluno;
+}
+
+
+
+
+typedef struct {
      uintptr_t * table;
      int size;
      int max;
@@ -28,18 +48,63 @@ uint32_t hashf(const char* str, uint32_t h){
 
 
 int hash_insere(thash * h, void * bucket){
+    uint32_t hash = hashf(h->get_key(bucket),SEED);
+    int pos = hash % (h->max);
+    if (h->max == (h->size+1)){
+        free(bucket);
+        return EXIT_FAILURE;
+    }else{
+        while(h->table[pos] != 0){
+            if (h->table[pos] == h->deleted)
+                break;
+            pos = (pos +1) % h->max;
+        }
+        h->table[pos] = (uintptr_t) bucket;
+        h->size +=1;
+    }
+    return EXIT_SUCCESS;
 }
 
 
 
 int hash_constroi(thash * h,int nbuckets, char * (*get_key)(void *) ){
+    h->table = calloc(sizeof(uintptr_t),nbuckets +1);
+    if (h->table == NULL){
+        return EXIT_FAILURE;
+    }
+    h->max = nbuckets +1;
+    h->size = 0;
+    h->deleted = (uintptr_t) & (h->size);
+    h->get_key = get_key;
+    return EXIT_SUCCESS;
 }
 
 
 void * hash_busca(thash h, const char * key){
+    int pos = hashf(key,SEED) %(h.max);
+    while(h.table[pos] != 0){
+        if (strcmp (h.get_key((void*)h.table[pos]),key) ==0)
+            return (void *)h.table[pos];
+        else
+            pos = (pos+1)%(h.max);
+    }
+    return NULL;
 }
 
 int hash_remove(thash * h, const char * key){
+    int pos = hashf(key,SEED) % (h->max);
+    while(h->table[pos]!=0){
+        if (strcmp (h->get_key((void*)h->table[pos]),key) ==0){
+            free((void *) h->table[pos]);
+            h->table[pos] = h->deleted;
+            h->size -=1;
+            return EXIT_SUCCESS;
+        }else{
+            pos = (pos+1)%h->max;
+        }
+
+    }
+    return EXIT_FAILURE;
 }
 
 void hash_apaga(thash *h){
@@ -53,6 +118,8 @@ void hash_apaga(thash *h){
     }
     free(h->table);
 }
+
+
 
 
 
@@ -93,7 +160,6 @@ void test_search(){
 
     hash_apaga(&h);
 }
-
 
 void test_remove(){
     thash h;
