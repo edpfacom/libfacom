@@ -38,6 +38,7 @@ void constroi_heap(int v[], int max_size){
 }
 
 void sobe(int v[], int pos){
+    int 
 }
 
 int acessa_max(int v[]){
@@ -164,10 +165,10 @@ void test_insere_elemento(){
     int max_size = 10;
     int entrada[10] = {100,62,30,50,60,25,20};
     int saida1[]   = {100,70,30,62,60,25,20,50};
-    int saida2[]   = {150,100,30,70,60,25,20,62};;
+    int saida2[]   = {150,100,30,70,60,25,20,62};
 
     int i;
-    int tam = sizeof(entrada)/sizeof(entrada[0]);
+    int tam = 7;
     /*chamada*/
     assert(insere_elemento(entrada,&tam,max_size,70)==EXIT_SUCCESS);
     assert(tam == 8);
@@ -193,7 +194,7 @@ void test_altera_prioridade(){
     int saida1[]    = {105,100,30,50,60,25,20};
     int saida2[]    = {100,60,30,50,1,25,20};
     int i;
-    int tam = sizeof(entrada)/sizeof(entrada[0]);
+    int tam = 7 ;
     /*chamada*/
     assert(altera_prioridade(entrada,tam,1,105)==EXIT_SUCCESS);
     /*verificacao*/
