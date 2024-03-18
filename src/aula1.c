@@ -137,7 +137,7 @@ void test_acessa_max(){
 void test_extrai_max(){
     /*inicializacao*/
     int entrada[] = {100,62,30,50,60,25,20};
-    int saida1[]   = {62,60,30,50,60,25};
+    int saida1[]   = {62,60,30,50,20,25};
     int saida2[]   = {60,50,30,25,20};
 
     int i;
@@ -185,6 +185,28 @@ void test_insere_elemento(){
         assert(entrada[i]==saida2[i]);
     }
 }
+
+void test_altera_prioridade(){
+    /*inicializacao*/
+    int max_size = 10;
+    int entrada[10] = {100,62,30,50,60,25,20};
+    int saida1[]    = {105,100,30,50,60,25,20};
+    int saida2[]    = {100,60,30,50,1,25,20};
+    int i;
+    int tam = sizeof(entrada)/sizeof(entrada[0]);
+    /*chamada*/
+    assert(altera_prioridade(entrada,tam,1,105)==EXIT_SUCCESS);
+    /*verificacao*/
+    for (i=0;i<tam;i++){
+        assert(entrada[i]==saida1[i]);
+    }
+    /*chamada*/
+    assert(altera_prioridade(entrada,tam,0,1)==EXIT_SUCCESS);
+    /*verificacao*/
+    for (i=0;i<tam;i++){
+        assert(entrada[i]==saida2[i]);
+    }
+}
 void test_heapsort(){
 }
 
@@ -198,6 +220,7 @@ int main(void){
     test_acessa_max();
     test_extrai_max();
     test_insere_elemento();
+    test_altera_prioridade();
     test_heapsort();
 	return EXIT_SUCCESS;
 }
