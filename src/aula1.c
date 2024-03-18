@@ -102,11 +102,26 @@ void test_constroi_heap(){
 
 }
 
+void test_sobe(){
+    /*inicializacao*/
+    int entrada[] = {62,60,30,50,100,25,20};
+    int saida[]   = {100,62,30,50,60,25,20};
+    int i;
+    int max_size = sizeof(entrada)/sizeof(entrada[0]);
+    /*chamada*/
+    sobe(entrada,4);
+    /*verificacao*/
+    for (i=0;i<max_size;i++){
+        assert(entrada[i]==saida[i]);
+    }
+}
+
 int main(void){
     test_pai();
     test_filho_esq();
     test_filho_dir();
     test_desce();
     test_constroi_heap();
+    test_sobe();
 	return EXIT_SUCCESS;
 }
