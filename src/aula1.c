@@ -208,6 +208,14 @@ void test_altera_prioridade(){
     }
 }
 void test_heapsort(){
+    int entrada[]   = {100,62,30,50,60,25,20};
+    int saida[]     = {20 ,25,30,50,60,62,100};
+    int tam = sizeof(entrada)/sizeof(entrada[0]);
+    int i;
+    heapsort(entrada,tam);
+    for (i=0;i<tam;i++){
+        assert(entrada[i]==saida[i]);
+    }
 }
 
 int main(void){
