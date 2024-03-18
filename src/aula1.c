@@ -37,6 +37,20 @@ void constroi_heap(int v[], int max_size){
         desce(v,i,max_size);
 }
 
+void sobe(int v[], int pos){
+}
+
+int acessa_max(int v[]){
+}
+
+int extrai_max(int v[], int * tam){
+}
+int insere_elemento(int v[], int *tam, int max, int novo){
+}
+int altera_prioridade(int v[],int tam, int pos, int novo){
+}
+void heapsort(int v[], int tam){
+}
 void test_pai(){
     /*inicializacao */
     int r;
@@ -116,6 +130,64 @@ void test_sobe(){
     }
 }
 
+void test_acessa_max(){
+    int v[]   = {100,62,30,50,60,25,20};
+    assert(acessa_max(v) == 100);
+}
+void test_extrai_max(){
+    /*inicializacao*/
+    int entrada[] = {100,62,30,50,60,25,20};
+    int saida1[]   = {62,60,30,50,60,25};
+    int saida2[]   = {60,50,30,25,20};
+
+    int i;
+    int max_size = sizeof(entrada)/sizeof(entrada[0]);
+    /*chamada*/
+    assert(extrai_max(entrada,&max_size)==100);
+    assert(max_size == 6);
+    
+    /*verificacao*/
+    for (i=0;i<max_size;i++){
+        assert(entrada[i]==saida1[i]);
+    }
+    /*chamada*/
+    assert(extrai_max(entrada,&max_size)==62);
+    assert(max_size == 5);
+    
+    /*verificacao*/
+    for (i=0;i<max_size;i++){
+        assert(entrada[i]==saida2[i]);
+    }
+}
+void test_insere_elemento(){
+    /*inicializacao*/
+    int max_size = 10;
+    int entrada[10] = {100,62,30,50,60,25,20};
+    int saida1[]   = {100,70,30,62,60,25,20,50};
+    int saida2[]   = {150,100,30,70,60,25,20,62};;
+
+    int i;
+    int tam = sizeof(entrada)/sizeof(entrada[0]);
+    /*chamada*/
+    assert(insere_elemento(entrada,&tam,max_size,70)==EXIT_SUCCESS);
+    assert(tam == 8);
+    
+    /*verificacao*/
+    for (i=0;i<tam;i++){
+        assert(entrada[i]==saida1[i]);
+    }
+    /*chamada*/
+    assert(insere_elemento(entrada,&tam,max_size,150)==EXIT_SUCCESS);
+    assert(tam == 9);
+    
+    /*verificacao*/
+    for (i=0;i<tam;i++){
+        assert(entrada[i]==saida2[i]);
+    }
+}
+void test_heapsort(){
+}
+
 int main(void){
     test_pai();
     test_filho_esq();
@@ -123,5 +195,9 @@ int main(void){
     test_desce();
     test_constroi_heap();
     test_sobe();
+    test_acessa_max();
+    test_extrai_max();
+    test_insere_elemento();
+    test_heapsort();
 	return EXIT_SUCCESS;
 }
