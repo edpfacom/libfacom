@@ -38,7 +38,7 @@ void constroi_heap(int v[], int max_size){
 }
 
 void sobe(int v[], int pos){
-    int 
+    int p = pai(pos);
 }
 
 int acessa_max(int v[]){
@@ -165,7 +165,7 @@ void test_insere_elemento(){
     int max_size = 10;
     int entrada[10] = {100,62,30,50,60,25,20};
     int saida1[]   = {100,70,30,62,60,25,20,50};
-    int saida2[]   = {150,100,30,70,60,25,20,62};
+    int saida2[]   = {150,100,30,70,60,25,20,50,62};
 
     int i;
     int tam = 7;
