@@ -21,6 +21,19 @@ uint32_t hashf(const char* str, uint32_t h){
 int hash_insere(thash * h, void * bucket){
     uint32_t hash = hashf(h->get_key(bucket),SEED);
     int pos = hash %(h->max);
+    /*se esta cheio*/
+    if (h->max == (h->size+1)){
+        free(bucket);
+        return EXIT_FAILURE;
+    }else{  /*fazer a insercao*/
+        while(h->table[pos] != 0){
+            if (h->table[pos] == h->deleted)
+                break;
+            pos = (pos+1)%h->max;
+        }
+        h->table[pos] = (uintptr_t)bucket;
+        h->size +=1;
+    }
     return EXIT_SUCCESS;
 }
 
