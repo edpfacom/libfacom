@@ -6,7 +6,7 @@
 #include <assert.h>
 #include "../include/libfacom.h"
 
-typedef struct{
+typedef struct{ 
     char nome[30];
     char  cpf[11];
 }taluno;
