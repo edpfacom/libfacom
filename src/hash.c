@@ -52,17 +52,45 @@ int hash_constroi(thash * h,int nbuckets, char * (*get_key)(void *) ){
 }
 
 
-void * hash_busca(thash h, const char * key){
-    return NULL;
+void * hash_busca(thash  h, const char * key){
+    int pos = hashf(key,SEED) % (h.max);
+    void * ret = NULL;
+    while(h.table[pos]!=0 && ret == NULL){
+        if (strcmp(h.get_key((void*)h.table[pos]),key) == 0){
+            ret = (void *) h.table[pos];
+        }else{
+            pos = (pos+1) % h.max;
+        }
+    }
+    return ret;
 
 }
 
 int hash_remove(thash * h, const char * key){
+    int pos = hashf(key,SEED) % (h->max);
+    while(h->table[pos]!=0){
+        if (strcmp(h->get_key((void*)h->table[pos]),key) == 0){ /* se achei remove*/
+            free((void *)h->table[pos]);
+            h->table[pos] = h->deleted;
+            h->size -= 1;
+            return EXIT_SUCCESS;
+        }else{
+            pos = (pos+1) % h->max;
+        }
+    }
     return EXIT_FAILURE;
-
 }
 
 void hash_apaga(thash *h){
+    int pos;
+    for (pos =0; pos < h->max;pos++){
+        if (h->table[pos] != 0){
+            if (h->table[pos]!=h->deleted){
+                free((void*) h->table[pos]);
+            }
+        }
+    }
+    free(h->table);
 }
 
 

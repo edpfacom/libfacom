@@ -11,9 +11,18 @@ typedef struct{
     char  cpf[11];
 }taluno;
 
+typedef struct{
+    char placa[10];
+    char modelo[30];
+}tcarro;
+
 char * get_key(void * reg){
     return (*((taluno *)reg)).nome;
 }
+char * get_key_carro(void * reg){
+    return (*((tcarro *)reg)).placa;
+}
+
 
 
 void * aloca_aluno(char * nome, char * cpf){
@@ -22,6 +31,14 @@ void * aloca_aluno(char * nome, char * cpf){
     strcpy(aluno->cpf,cpf);
     return aluno;
 }
+
+void * aloca_carro(char * placa, char * modelo){
+    tcarro * carro = malloc(sizeof(tcarro));
+    strcpy(carro->placa,placa);
+    strcpy(carro->modelo,modelo);
+    return carro;
+}
+
 
 
 
@@ -97,11 +114,30 @@ void test_remove(){
 
 }
 
+void test_remove_carro(){
+    thash h;
+    int nbuckets = 10;
+    tcarro * carro;
+    hash_constroi(&h,nbuckets,get_key_carro);
+    assert(hash_insere(&h,aloca_carro("htj0073","vw fox"))==EXIT_SUCCESS);
+    assert(hash_insere(&h,aloca_carro("ook7308","honda fit"))==EXIT_SUCCESS);
+    assert(hash_insere(&h,aloca_carro("ook1234","fusca"))==EXIT_SUCCESS);
+
+    carro = hash_busca(h,"ook1234");
+    assert(strcmp(carro->modelo,"fusca")==0);
+    assert(h.size == 3);
+    carro = hash_busca(h,"ooo1234");
+    assert(carro == NULL);
+    hash_apaga(&h);
+
+}
+
 
 
 int main(int argc, char* argv[]){
     test_insere();
     test_search();
     test_remove();
+    test_remove_carro();
     return 0;
 }
