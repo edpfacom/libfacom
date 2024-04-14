@@ -7,7 +7,7 @@ Se você estiver dentro da pasta de teste executar
 gcc ../src/<algoritmo>.c <test_algoritmo>.c -o <executavel>
 ```
 
-Exemplo para compilar a hash
+Exemplo para compilar a hash quando estiver dentro da pasta de test
 
 ```
 gcc ../src/hash.c test_hash.c -o hash
