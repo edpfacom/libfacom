@@ -1,5 +1,20 @@
 # libfacom
 
+# compilar diretamente diversos arquivos
+
+Se você estiver dentro da pasta de teste executar
+```
+gcc ../src/<algoritmo>.c <test_algoritmo>.c -o <executavel>
+```
+
+Exemplo para compilar a hash
+
+```
+gcc ../src/hash.c test_hash.c -o hash
+```
+
+
+
 
 # compilar dinamicamente
 
