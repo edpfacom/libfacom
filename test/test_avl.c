@@ -102,12 +102,36 @@ void test_remove(){
     avl_insere(&arv,30);
     avl_insere(&arv,25);
     
-    avl_remove(&arv,50);
-    assert(arv->dir->dir->item == 30);
-    assert(arv->dir->dir->dir == NULL);
-    assert(arv->dir->dir->esq->item == 25);
-
+    avl_remove(&arv,15);
+    assert(arv->item == 20);
+    assert(arv->dir->item == 30);
+    assert(arv->esq->item == 10);
     
+    assert(arv->esq->esq->item == 5);
+
+    assert(arv->dir->dir->item == 50);
+    assert(arv->dir->esq->item == 23);
+    assert(arv->dir->esq->dir->item == 25);
+
+    avl_remove(&arv,20);
+    assert(arv->item == 23);
+    assert(arv->dir->item == 30);
+    assert(arv->esq->item == 10);
+    
+    assert(arv->esq->esq->item == 5);
+
+    assert(arv->dir->dir->item == 50);
+    assert(arv->dir->esq->item == 25);
+
+
+    avl_remove(&arv,10);
+    assert(arv->item == 23);
+    assert(arv->dir->item == 30);
+    assert(arv->esq->item ==5);
+    assert(arv->dir->dir->item == 50);
+    assert(arv->dir->esq->item == 25);
+
+   
 }
 
 int main(void){
