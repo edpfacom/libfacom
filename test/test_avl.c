@@ -39,6 +39,7 @@ void test_rotacao(){
     assert(arv->dir->item ==12);
     assert(arv->esq->dir->item == 7);
     assert(arv->esq->esq->item == 3);
+    avl_destroi(arv);
  }
 
 void test_insere(){
@@ -87,6 +88,7 @@ void test_insere(){
     assert(arv->dir->dir->item == 30);
     assert(arv->dir->dir->dir->item == 50);
     assert(arv->dir->dir->esq->item == 25);
+    avl_destroi(arv);
 }
 
 void test_remove(){
@@ -130,8 +132,7 @@ void test_remove(){
     assert(arv->esq->item ==5);
     assert(arv->dir->dir->item == 50);
     assert(arv->dir->esq->item == 25);
-
-   
+    avl_destroi(arv);
 }
 
 int main(void){
