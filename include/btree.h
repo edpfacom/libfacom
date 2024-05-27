@@ -24,5 +24,9 @@ typedef struct _arv{
 
 int btree_split(tarv *parv, tnode * x, int i);
 int btree_insere_naocheio(tarv *parv, tnode * x, tchave k);
+int btree_insere(tarv *parv, tchave k);
+
+tnode * aloca_node(tarv * parv);
+void btree_constroi(tarv * parv, int t);
 
 #endif
