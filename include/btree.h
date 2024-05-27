@@ -29,4 +29,7 @@ int btree_insere(tarv *parv, tchave k);
 tnode * aloca_node(tarv * parv);
 void btree_constroi(tarv * parv, int t);
 
+int procura_chave(tnode *x, tchave k);
+int pega_irmao_maior(tnode *x, int cpos);
+int procura_ic(tnode *x, tchave k);
 #endif

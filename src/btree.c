@@ -85,7 +85,69 @@ int btree_insere_naocheio(tarv *parv, tnode * x, tchave k){
 }
 
 int btree_insere(tarv *parv, tchave k){
+    tnode * r;
+    tnode * s;
+    int t;
+    int ret = 1;
     
+    r = parv->raiz;
+    t = parv->t;
+    if (r->n == 2*t-1){
+        s = aloca_node(parv);
+        parv->raiz = s;
+        s->folha = FALSE;
+        s->n = 0;
+        s->c[0] = r;
+        ret = btree_split(parv,s,0);
+        if (ret)
+           ret = btree_insere_naocheio(parv,s,k);
+    }else{
+        ret = btree_insere_naocheio(parv,r,k);
+    }
+    return ret;
+}
+int procura_chave(tnode *x, tchave k){
+    int i;
+    int ret = -1;
+    for(i=0;i<x->n;i++){
+        if (x->chaves[i] == k){
+            ret = i;
+        }
+    }
+    return ret;
+}
+
+
+int procura_ic(tnode *x, tchave k){
+    int i;
+    i = x->n-1;
+    while (k < x->chaves[i] && i >= 0){
+        i-=1;
+    }
+    i+=1;
+    return i;
+}
+
+int pega_irmao_maior(tnode *x, int cpos){
+    int ant;
+    int pos;
+    int ret;
+    ant = cpos -1;
+    pos = cpos +1;
+    if (ant < 0){
+        ret = pos;
+    }else if (pos > x->n){
+        ret = ant;
+    }else{
+        if (x->c[ant]->n > x->c[pos]->n){
+            ret = ant;
+        }else{
+            ret = pos;
+        }
+    }
+    return ret;
+
+
 }
 
 

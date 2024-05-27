@@ -267,13 +267,70 @@ void test_btree_insere(){
     assert(y->chaves[1] == 90);
     assert(y->n == 2);
     assert(y->folha==FALSE);
-
-    imprime_arvore(arv.raiz,0,0);
-
 }
+
+void test_btree_procura_chave(){
+    tarv arv;
+    tnode *x, *y;
+    int t; 
+    int i;
+    t = 3;
+
+    btree_constroi(&arv,t);
+
+    for (i=10;i<=50;i+=10)
+        btree_insere(&arv,i);
+    
+    assert(procura_chave(arv.raiz,10)==0);
+    assert(procura_chave(arv.raiz,20)==1);
+    assert(procura_chave(arv.raiz,30)==2);
+    assert(procura_chave(arv.raiz,40)==3);
+    assert(procura_chave(arv.raiz,50)==4);
+}
+
+void test_btree_procura_chave_ic(){
+    tarv arv;
+    tnode *x, *y;
+    int t; 
+    int i;
+    t = 3;
+
+    btree_constroi(&arv,t);
+
+    for (i=10;i<=50;i+=10)
+        btree_insere(&arv,i);
+    
+    assert(procura_ic(arv.raiz,9)==0);
+    assert(procura_ic(arv.raiz,18)==1);
+    assert(procura_ic(arv.raiz,28)==2);
+    assert(procura_ic(arv.raiz,38)==3);
+    assert(procura_ic(arv.raiz,48)==4);
+    assert(procura_ic(arv.raiz,51)==5);
+}
+void test_btree_pega_irmao_maior(){
+    tarv arv;
+    tnode *x, *y;
+    int t; 
+    int i;
+    t = 3;
+
+    btree_constroi(&arv,t);
+
+    for (i=10;i<=100;i+=10)
+        btree_insere(&arv,i);
+   
+    imprime_arvore(arv.raiz,0,0);
+    assert(pega_irmao_maior(arv.raiz,0)==1);
+    assert(pega_irmao_maior(arv.raiz,1)==2);
+    assert(pega_irmao_maior(arv.raiz,2)==1);
+}
+
 
 int main(void){
     test_btree_split();
     test_btree_insere_naocheio();
     test_btree_insere();
+    test_btree_procura_chave(); 
+    test_btree_procura_chave_ic();
+    test_btree_pega_irmao_maior();
 }
