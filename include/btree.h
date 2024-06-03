@@ -32,4 +32,10 @@ void btree_constroi(tarv * parv, int t);
 int procura_chave(tnode *x, tchave k);
 int pega_irmao_maior(tnode *x, int cpos);
 int procura_ic(tnode *x, tchave k);
+
+
+void merge(tarv *parv, tnode *x, int cpos);
+void pega_emprestado_irmao(tnode *x, int cpos,int irmao);
+int btree_remove(tarv *parv, tchave k);
+
 #endif
