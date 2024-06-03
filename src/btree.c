@@ -67,7 +67,8 @@ void merge(tarv *parv, tnode *x, int cpos){
 
     }
     y->n = 2*(parv->t)-1;
-    /*shift right em  x  para colocar elemento que ira subir*/
+    /* ERRADO !! shift right em  x  para colocar elemento que ira subir*/
+    /*arruma x com o elemento a menos */
     for (i=cpos;i<x->n-1;i++){
     
     }
