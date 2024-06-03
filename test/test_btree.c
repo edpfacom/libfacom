@@ -807,12 +807,14 @@ int main(void){
     test_btree_procura_chave_ic();
     test_btree_pega_irmao_maior();
 
-    test_btree_merge();
-    test_btree_merge2();
-    test_btree_merge3();
     test_btree_empresta_irmao();
     test_btree_empresta_irmao2();
 
+
+
+    test_btree_merge();
+    test_btree_merge2();
+    test_btree_merge3();
 
     test_btree_remove();
     test_btree_remove2();
